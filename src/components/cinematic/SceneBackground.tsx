@@ -1,49 +1,11 @@
-"use client";
-
-import { Float, MeshDistortMaterial, Sparkles, Stars } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
-import { Bloom, EffectComposer, Noise, Vignette } from "@react-three/postprocessing";
-import { Suspense } from "react";
-
-function EmberCore() {
-  return (
-    <group>
-      <Float speed={1.2} rotationIntensity={0.5} floatIntensity={2}>
-        <mesh position={[0, 0, 0]}>
-          <icosahedronGeometry args={[1.1, 1]} />
-          <MeshDistortMaterial
-            color="#ff6500"
-            emissive="#ff2a00"
-            emissiveIntensity={1.4}
-            roughness={0.2}
-            metalness={0.1}
-            distort={0.35}
-            speed={1.5}
-          />
-        </mesh>
-      </Float>
-      <Sparkles count={80} scale={[10, 6, 6]} size={3} speed={0.5} color="#ffb000" />
-      <Stars radius={30} depth={12} count={2000} factor={2} saturation={0} fade speed={0.8} />
-    </group>
-  );
-}
-
 export function SceneBackground() {
   return (
-    <div className="pointer-events-none absolute inset-0 opacity-90">
-      <Canvas camera={{ position: [0, 0, 6], fov: 50 }}>
-        <Suspense fallback={null}>
-          <color attach="background" args={["#050505"]} />
-          <ambientLight intensity={1.2} />
-          <pointLight position={[0, 0, 2]} intensity={20} color="#ff6500" />
-          <EmberCore />
-          <EffectComposer>
-            <Bloom luminanceThreshold={0.3} luminanceSmoothing={0.9} intensity={1.7} />
-            <Noise opacity={0.08} />
-            <Vignette eskil={false} offset={0.2} darkness={0.8} />
-          </EffectComposer>
-        </Suspense>
-      </Canvas>
+    <div className="pointer-events-none absolute inset-0 overflow-hidden bg-[#050505]">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_52%_52%,_rgba(255,101,0,0.5)_0%,_rgba(178,35,0,0.24)_20%,_transparent_58%)]" />
+      <div className="absolute -left-[12%] top-[12%] h-[75%] w-[75%] rotate-[-18deg] rounded-[45%] bg-[radial-gradient(ellipse_at_center,_rgba(255,176,0,0.38),_rgba(255,42,0,0.18)_34%,_transparent_70%)] blur-2xl" />
+      <div className="absolute -right-[15%] bottom-[-20%] h-[80%] w-[70%] rotate-[24deg] rounded-[45%] bg-[radial-gradient(ellipse_at_center,_rgba(142,18,65,0.42),_rgba(255,42,0,0.16)_42%,_transparent_72%)] blur-3xl" />
+      <div className="absolute left-[42%] top-[38%] h-32 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ff6500]/35 blur-2xl animate-[pulse_5s_ease-in-out_infinite]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_28%,_rgba(0,0,0,0.72)_100%)]" />
     </div>
   );
 }
