@@ -42,6 +42,15 @@ export function Interactions({ reduced }: { reduced: boolean }) {
         tilt.style.setProperty("--rx", `${(-py * max).toFixed(2)}deg`);
       }
       tilted = tilt;
+      // characters' eyes follow the cursor
+      document.querySelectorAll<HTMLElement>("[data-look]").forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > window.innerHeight) return;
+        const dx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / 500));
+        const dy = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height * 0.13)) / 400));
+        el.style.setProperty("--lx", `${(dx * 2.6).toFixed(2)}px`);
+        el.style.setProperty("--ly", `${(dy * 1.6).toFixed(2)}px`);
+      });
     };
 
     const onMove = (e: PointerEvent) => {

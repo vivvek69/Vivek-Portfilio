@@ -2,7 +2,7 @@
 
 import { ChevronDown, FastForward, RotateCcw } from "lucide-react";
 import dynamic from "next/dynamic";
-import { FirePortrait } from "../ui/FirePortrait";
+import { AnimeCharacter } from "../ui/AnimeCharacter";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { profile } from "@/data/resumeData";
 import { useCapabilities } from "../hooks/useCapabilities";
@@ -211,17 +211,10 @@ function IdentityReveal({ revealed, onEnter }: { revealed: boolean; onEnter: () 
         </div>
       </div>
 
-      {/* photograph revealed by fire */}
+      {/* the main character rises out of the fire */}
       <div className="order-1 flex justify-center md:order-2 md:justify-end">
-        <figure className="relative w-[min(62vw,19rem)] md:w-[min(32vw,27rem)]">
-          <div
-            aria-hidden
-            className="absolute -inset-6 rounded-[50%] bg-[radial-gradient(closest-side,rgba(255,106,19,0.35),transparent)] blur-2xl"
-            style={{ opacity: lit ? 1 : 0, transition: "opacity 2s ease 0.3s" }}
-          />
-          <div data-tilt="5">
-            <FirePortrait lit={lit} eager sizes="(max-width: 768px) 62vw, 32vw" />
-          </div>
+        <figure className="relative aspect-[400/860] h-[44svh] md:h-[min(84svh,52rem)]">
+          <AnimeCharacter lit={lit} className="h-full w-full" />
           <figcaption
             className="absolute -left-7 top-4 font-display text-xs tracking-[0.5em] text-amber/80 [writing-mode:vertical-rl] max-md:hidden"
             style={{ opacity: lit ? 1 : 0, transition: "opacity 1.2s ease 1.6s" }}

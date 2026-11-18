@@ -390,6 +390,54 @@ body.intro-lock {
   100% { transform: translate(14px, -220px); opacity: 0; }
 }
 
+/* ═════════════════════════ Anime character ═════════════════════════ */
+@property --rise {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 0%;
+}
+.anime-char {
+  --rise: 0%;
+  transition: --rise 2.6s cubic-bezier(.45,.05,.25,1) .2s;
+}
+.anime-char.is-lit,
+.is-revealed .anime-char { --rise: 112%; }
+.anime-char > svg {
+  -webkit-mask-image: linear-gradient(to top, #000 calc(var(--rise) - 6%), transparent var(--rise));
+  mask-image: linear-gradient(to top, #000 calc(var(--rise) - 6%), transparent var(--rise));
+  filter: drop-shadow(0 0 18px rgba(255, 106, 19, 0.25));
+  animation: char-cool 3s ease .4s both paused;
+}
+.anime-char.is-lit > svg,
+.is-revealed .anime-char > svg { animation-play-state: running; }
+@keyframes char-cool {
+  0% { filter: brightness(2.4) sepia(1) saturate(3) hue-rotate(-12deg) drop-shadow(0 0 30px rgba(255, 106, 19, 0.9)); }
+  100% { filter: drop-shadow(0 0 18px rgba(255, 106, 19, 0.25)); }
+}
+.char-edge {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: calc(var(--rise) - 3%);
+  height: 3px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, #fff3dc, #ff8c1a 50%, transparent);
+  box-shadow: 0 0 24px 6px rgba(255, 106, 19, 0.55);
+  opacity: 0;
+  pointer-events: none;
+}
+.anime-char.is-lit .char-edge,
+.is-revealed .anime-char .char-edge { animation: char-edge 2.8s ease .2s both; }
+@keyframes char-edge {
+  0% { opacity: 0; }
+  10%, 80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .anime-char { --rise: 112%; }
+  .anime-char svg *, .anime-char > svg { animation: none !important; }
+}
+
 /* ═════════════════════════ Scene title ignition ═════════════════════════ */
 .ignite .ch { display: inline-block; opacity: 0; white-space: pre; }
 .is-revealed .ignite .ch {

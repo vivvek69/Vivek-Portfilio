@@ -1,5 +1,6 @@
 import { Download } from "lucide-react";
-import { FirePortrait } from "../ui/FirePortrait";
+import Image from "next/image";
+import { AnimeCharacter } from "../ui/AnimeCharacter";
 import { abilities, profile } from "@/data/resumeData";
 import { Scene } from "../ui/Scene";
 
@@ -27,7 +28,19 @@ export function CharacterScene() {
         <div data-reveal className="relative">
           <div className="relative mx-auto max-w-sm lg:mx-0">
             <div className="relative" data-tilt="6">
-              <FirePortrait lit={false} sizes="(max-width: 1024px) 80vw, 30vw" />
+              {/* dark portal behind the character */}
+              <div aria-hidden className="absolute inset-x-[6%] bottom-0 top-[8%] overflow-hidden rounded-t-[999px] bg-[radial-gradient(80%_60%_at_50%_100%,#3a1206_0%,#140805_55%,#070504_100%)] shadow-[inset_0_0_0_1px_rgba(255,181,71,0.35)]">
+                <div className="portrait-smoke portrait-smoke-a" />
+                <div className="portrait-smoke portrait-smoke-b" />
+              </div>
+              <AnimeCharacter className="relative mx-auto aspect-[400/860] w-[78%]" />
+              {/* human form: the real photograph */}
+              <figure className="absolute right-0 top-[6%] flex flex-col items-center gap-1.5">
+                <span className="relative block h-20 w-20 overflow-hidden rounded-full border border-amber/50 bg-[radial-gradient(circle_at_50%_80%,#3a1206,#0c0806)] shadow-[0_0_24px_rgba(255,106,19,0.35)]">
+                  <Image src="/assets/profile/vivek-cutout.webp" alt="Pasunuti Vivek — photograph" fill sizes="80px" className="object-cover object-[50%_18%] scale-[1.35]" />
+                </span>
+                <figcaption className="text-[0.55rem] uppercase tracking-[0.3em] text-bone-dim">Human form</figcaption>
+              </figure>
               <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(0deg,rgba(5,4,3,0.95),transparent)] p-5 pt-16">
                 <p className="eyebrow !text-[0.6rem]">Main Character</p>
                 <p className="mt-2 font-display text-2xl font-extrabold text-bone">{profile.name}</p>
