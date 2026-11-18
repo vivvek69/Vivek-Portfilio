@@ -23,7 +23,13 @@ const mincho = localFont({
   fallback: ["Yu Mincho", "Hiragino Mincho ProN", "Noto Serif JP", "Times New Roman", "serif"],
 });
 
+// Vercel provides the production domain; used to build absolute social-preview URLs.
+const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Pasunuti Vivek — AI Engineer",
   description:
     "Cinematic portfolio of Pasunuti Vivek, AI Engineer at Sigmanix Tech Solutions — agentic AI, LLM applications, RAG systems, and backend engineering.",
